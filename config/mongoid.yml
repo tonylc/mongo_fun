@@ -1,9 +1,9 @@
 development:
   host:     flame.mongohq.com
-  port:     27106
+  port:     27103
   username: temp
   password: temp12345
-  database: claimable-challenge
+  database: claimable_challenge
 
 test:
   host: localhost
