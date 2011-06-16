@@ -1,5 +1,8 @@
 <h1>Listing claims</h1>
-
+<%= form_tag claims_path, :method => 'get' do %>
+	<%= text_field_tag :search_claims, '', :placeholder => 'Search for location postcode' %>
+	<%= submit_tag 'Search' %>
+<% end %>
 <table>
   <tr>
     <th>Claim type</th>

@@ -2,7 +2,11 @@ class ClaimsController < ApplicationController
   # GET /claims
   # GET /claims.xml
   def index
-    @claims = Claim.all
+    if params[:search_claims].present?
+      @claims = Claim.where(:claim_location_postcode => Regexp.new(params[:search_claims], Regexp::IGNORECASE))
+    else
+      @claims = Claim.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
