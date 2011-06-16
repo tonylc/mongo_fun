@@ -3,7 +3,7 @@ class ClaimsController < ApplicationController
   # GET /claims.xml
   def index
     if params[:search_claims].present?
-      @claims = Claim.where(:claim_location_postcode => Regexp.new(params[:search_claims], Regexp::IGNORECASE))
+      @claims = Claim.where(:claim_location_postcode => Regexp.new("^#{params[:search_claims]}", Regexp::IGNORECASE))
     else
       @claims = Claim.all
     end
