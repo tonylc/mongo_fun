@@ -4,6 +4,7 @@ class ClaimsController < ApplicationController
   def index
     #TODO does mogoid support includes to avoid n+1 query?
     if params[:search_claims].present?
+      @search_result = true
       fuzzy_insensitive_regex = Regexp.new("^#{params[:search_claims]}", Regexp::IGNORECASE)
       @claims = [Claim.where(:claim_location_postcode => fuzzy_insensitive_regex),
                  Customer.where(:name => fuzzy_insensitive_regex).map(&:claim)].flatten.uniq

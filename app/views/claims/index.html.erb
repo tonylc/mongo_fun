@@ -53,4 +53,8 @@
 
 <br />
 
+<% if @search_result %>
+	<p><%= link_to "Clear Search Result", claims_path %></p>
+<% end %>
+
 <%= link_to 'New Claim', new_claim_path %>
