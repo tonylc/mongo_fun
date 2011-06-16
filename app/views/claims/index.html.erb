@@ -20,20 +20,34 @@
   </tr>
 
 <% @claims.each do |claim| %>
-  <tr>
-    <td><%= claim.claim_type %></td>
-    <td><%= claim.active %></td>
-    <td><%= claim.claim_location_postcode %></td>
-    <td><%= claim.customer_name %></td>
-    <td><%= claim.customer_postcode %></td>
-    <td><%= claim.customer_phone %></td>
-    <td><%= claim.customer_dob %></td>
-    <td><%= claim.cost %></td>
-    <td><%= claim.date_of_loss %></td>
-    <td><%= link_to 'Show', claim %></td>
-    <td><%= link_to 'Edit', edit_claim_path(claim) %></td>
-    <td><%= link_to 'Destroy', claim, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+	<tbody>
+	  <tr>
+	    <td><%= claim.claim_type %></td>
+	    <td><%= claim.active %></td>
+	    <td><%= claim.claim_location_postcode %></td>
+	    <td><%= claim.customer_name %></td>
+	    <td><%= claim.customer_postcode %></td>
+	    <td><%= claim.customer_phone %></td>
+	    <td><%= claim.customer_dob %></td>
+	    <td><%= claim.cost %></td>
+	    <td><%= claim.date_of_loss %></td>
+	    <td><%= link_to 'Show', claim %></td>
+	    <td><%= link_to 'Edit', edit_claim_path(claim) %></td>
+	    <td><%= link_to 'Destroy', claim, :confirm => 'Are you sure?', :method => :delete %></td>
+		<% if !claim.customers.empty? %>
+			<tr>
+				<th>Name
+				<th>Postcode
+				<th>Phone
+				<th>Dob
+		<% end %>
+		<% claim.customers.each do |customer| %>
+			<tr>
+				<td><%= customer.name %>
+		    <td><%= customer.postcode %>
+		    <td><%= customer.phone %>
+		    <td><%= customer.dob %>
+		<% end %>
 <% end %>
 </table>
 

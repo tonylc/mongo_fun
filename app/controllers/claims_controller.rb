@@ -2,8 +2,9 @@ class ClaimsController < ApplicationController
   # GET /claims
   # GET /claims.xml
   def index
+    #TODO does mogoid not support includes to avoid n+1 query?
     if params[:search_claims].present?
-      @claims = Claim.where(:claim_location_postcode => Regexp.new("^#{params[:search_claims]}", Regexp::IGNORECASE))
+      @claims = Claim.where(:claim_location_postcode => Regexp.new("^#{params[:search_claims]}", Regexp::IGNORECASE))#.includes(:customers)
     else
       @claims = Claim.all
     end
