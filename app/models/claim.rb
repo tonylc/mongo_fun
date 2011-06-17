@@ -1,11 +1,7 @@
 class UniqueWithinValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    # is there a way to do this with uniqueness?  querying to do save kinda sucks...
-    claims_with_postcode = Claim.where(attribute => value).created_within_months(options[:months])
-    # why doesn't reject! work?
-    # remove itself from the check
-    claims_with_postcode = claims_with_postcode.reject {|claims| claims.id == record.id}
-    if claims_with_postcode.size > 0
+    # do i need to handle case insensitivity?
+    if Claim.where(attribute => value).created_within_months(options[:months]).excludes(:id => record.id).exists?
       record.errors[attribute] << "already has a claim within the past #{options[:months]} months."
     end
   end
