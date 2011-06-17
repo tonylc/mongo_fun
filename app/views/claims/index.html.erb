@@ -1,53 +1,55 @@
+<% content_for :head do %>
+<style>
+	.customers-list { padding-left: 20px; }
+</style>
+<% end %>
+
 <h1>Listing claims</h1>
 <%= form_tag claims_path, :method => 'get' do %>
 	<%= text_field_tag :search_claims, '', :placeholder => 'Search for location postcode' %>
 	<%= submit_tag 'Search' %>
 <% end %>
 <table>
-  <tr>
-    <th>Claim type</th>
-    <th>Active</th>
-    <th>Claim location postcode</th>
-    <th>Customer name</th>
-    <th>Customer postcode</th>
-    <th>Customer phone</th>
-    <th>Customer dob</th>
-    <th>Cost</th>
-    <th>Date of loss</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+	<thead>
+	  <tr>
+	    <th>Claim type
+	    <th>Active
+	    <th>Claim location postcode
+	    <th>Cost
+	    <th>Date of loss
+	    <th>
+	    <th>
+	    <th>
 <% @claims.each do |claim| %>
 	<tbody>
 	  <tr>
 	    <td><%= claim.claim_type %></td>
 	    <td><%= claim.active %></td>
 	    <td><%= claim.claim_location_postcode %></td>
-	    <td><%= claim.customer_name %></td>
-	    <td><%= claim.customer_postcode %></td>
-	    <td><%= claim.customer_phone %></td>
-	    <td><%= claim.customer_dob %></td>
 	    <td><%= claim.cost %></td>
 	    <td><%= claim.date_of_loss %></td>
 	    <td><%= link_to 'Show', claim %></td>
 	    <td><%= link_to 'Edit', edit_claim_path(claim) %></td>
 	    <td><%= link_to 'Destroy', claim, :confirm => 'Are you sure?', :method => :delete %></td>
 		<% if !claim.customers.empty? %>
-			<tr>
-				<th>Name
-				<th>Postcode
-				<th>Phone
-				<th>Dob
+		<tr>
+			<td colspan=8>
+				<table class='customers-list'>
+					<tr>
+						<th>Name
+						<th>Postcode
+						<th>Phone
+						<th>Dob
+				<% claim.customers.each do |customer| %>
+					<tr>
+						<td><%= customer.name %>
+				    <td><%= customer.postcode %>
+				    <td><%= customer.phone %>
+				    <td><%= customer.dob %>
+				<% end %>
+				</table>
 		<% end %>
-		<% claim.customers.each do |customer| %>
-			<tr>
-				<td><%= customer.name %>
-		    <td><%= customer.postcode %>
-		    <td><%= customer.phone %>
-		    <td><%= customer.dob %>
-		<% end %>
+	</tbody>
 <% end %>
 </table>
 
