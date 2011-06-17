@@ -7,5 +7,6 @@ class Customer
   field :phone, :type => String
   field :dob, :type => Date
   
+  attr_accessible :name, :postcode, :phone, :dob
   belongs_to :claim
 end
