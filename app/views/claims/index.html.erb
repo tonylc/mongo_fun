@@ -12,22 +12,26 @@
 <table>
 	<thead>
 	  <tr>
+			<th>Claim ID #
 	    <th>Claim type
 	    <th>Active
 	    <th>Claim location postcode
 	    <th>Cost
 	    <th>Date of loss
+			<th>Created At
 	    <th>
 	    <th>
 	    <th>
 <% @claims.each do |claim| %>
 	<tbody>
 	  <tr>
+			<td><%= claim.id %>
 	    <td><%= claim.claim_type %></td>
 	    <td><%= claim.active %></td>
 	    <td><%= claim.claim_location_postcode %></td>
 	    <td><%= claim.cost %></td>
 	    <td><%= claim.date_of_loss %></td>
+			<td><%= claim.created_at %>
 	    <td><%= link_to 'Show', claim %></td>
 	    <td><%= link_to 'Edit', edit_claim_path(claim) %></td>
 	    <td><%= link_to 'Destroy', claim, :confirm => 'Are you sure?', :method => :delete %></td>
