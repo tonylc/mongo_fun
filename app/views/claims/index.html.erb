@@ -1,13 +1,15 @@
 <% content_for :head do %>
 <style>
-	.customers-list { padding-left: 20px; }
+	.error-msg { display: none; color: #cc0000; }
+	.customers-list, .notes-list { padding-left: 20px; }
 </style>
 <% end %>
 
 <h1>Listing claims</h1>
 <%= form_tag claims_path, :method => 'get' do %>
+	<div class='error-msg'>Please enter text</div>
 	<%= text_field_tag :search_claims, '', :placeholder => 'Search for location postcode' %>
-	<%= submit_tag 'Search' %>
+	<%= submit_tag 'Search', :id => 'submit-search' %>
 <% end %>
 <table>
 	<thead>
@@ -40,7 +42,7 @@
 			<td colspan=8>
 				<table class='customers-list'>
 					<tr>
-						<th>Name
+						<th>Customer Name
 						<th>Postcode
 						<th>Phone
 						<th>Dob
@@ -50,6 +52,20 @@
 				    <td><%= customer.postcode %>
 				    <td><%= customer.phone %>
 				    <td><%= customer.dob %>
+				<% end %>
+				</table>
+		<% end %>
+		<% if !claim.notes.empty? %>
+		<tr>
+			<td colspan=8>
+				<table class='notes-list'>
+					<tr>
+						<th>Author Name
+						<th>Body Text
+				<% claim.notes.each do |note| %>
+					<tr>
+						<td><%= note.author_name %>
+				    <td><%= note.body_text %>
 				<% end %>
 				</table>
 		<% end %>
@@ -64,3 +80,17 @@
 <% end %>
 
 <%= link_to 'New Claim', new_claim_path %>
+
+<% content_for :script do %>
+<script>
+	$('#submit-search').click(function() {
+		var searchField = $('#search_claims').val();
+		if (searchField.match(/^\s*$/)) {
+			$('.error-msg').fadeIn();
+			return false;
+		} else {
+			$('.error-msg').fadeOut();
+		}
+	});
+</script>
+<% end %>
