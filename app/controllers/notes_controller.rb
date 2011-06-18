@@ -13,7 +13,7 @@ class NotesController < ApplicationController
   def edit
     @note = @claim.notes.find(params[:id])
   end
-  
+
   def create
     @note = @claim.notes.create(params[:note])
 
@@ -37,9 +37,17 @@ class NotesController < ApplicationController
       end
     end
   end
-  
+
+  def show
+    @note = @claim.notes.find(params[:id])
+
+    respond_to do |format|
+      format.json { render :json => @note }
+    end
+  end
+
   private
-  
+
   def set_claim
     @claim = Claim.find(params[:claim_id])
   end

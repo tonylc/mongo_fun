@@ -12,7 +12,7 @@ class CustomersController < ApplicationController
   def edit
     @customer = @claim.customers.find(params[:id])
   end
-  
+
   def create
     @customer = @claim.customers.create(params[:customer])
 
@@ -36,9 +36,17 @@ class CustomersController < ApplicationController
       end
     end
   end
-  
+
+  def show
+    @customer = @claim.customers.find(params[:id])
+
+    respond_to do |format|
+      format.json { render :json => @customer }
+    end
+  end
+
   private
-  
+
   def set_claim
     @claim = Claim.find(params[:claim_id])
   end

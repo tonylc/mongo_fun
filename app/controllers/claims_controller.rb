@@ -21,6 +21,7 @@ class ClaimsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @claims }
+      format.json { render :json => @claims }
     end
   end
 
@@ -32,6 +33,7 @@ class ClaimsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @claim }
+      format.json { render :json => @claim }
     end
   end
 

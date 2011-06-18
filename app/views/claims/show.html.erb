@@ -28,7 +28,8 @@
 <fieldset>
 	<legend>Customers</legend>
 	<% @claim.customers.each do |customer| %>
-		<p><b>Name:</b> <%= customer.name %> <%= link_to 'Edit', edit_claim_customer_path(@claim, :id => customer) %></p>
+		<p><b>ID:</b> <%= customer.id %> <%= link_to 'Edit', edit_claim_customer_path(@claim, :id => customer) %></p>
+		<p><b>Name:</b> <%= customer.name %></p>
 		<p><b>Postcode:</b> <%= customer.postcode %></p>
 		<p><b>Phone:</b> <%= customer.phone %></p>
 		<p><b>Dob:</b> <%= customer.dob %></p>
@@ -40,7 +41,7 @@
 <fieldset>
 	<legend>Notes</legend>
 	<% @claim.notes.each do |note| %>
-		<p><b>Id:</b> <%= note.id %> <%= link_to 'Edit', edit_claim_note_path(@claim, :id => note) %></p>
+		<p><b>ID:</b> <%= note.id %> <%= link_to 'Edit', edit_claim_note_path(@claim, :id => note) %></p>
 		<p><b>Author Name:</b> <%= note.author_name %></p>
 		<p><b>Body Text:</b> <%= note.body_text %></p>
 		<p><b>Creation Date:</b> <%= note.created_at %></p>
