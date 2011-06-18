@@ -5,7 +5,7 @@ class ClaimsController < ApplicationController
     # TODO does mogoid support includes to avoid n+1 query?
     if params[:search_claims].present?
       @search_result = true
-      fuzzy_insensitive_regex = Regexp.new("^#{params[:search_claims]}", Regexp::IGNORECASE)
+      fuzzy_insensitive_regex = Regexp.new(".*#{params[:search_claims]}.*", Regexp::IGNORECASE)
       # TODO make more efficient...
       # i believe mongodb 1.5.3 supports $or
       # e.g. Claim.where('notes.author_name' => fuzzy_insensitive_regex)
